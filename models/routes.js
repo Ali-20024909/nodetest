@@ -14,6 +14,15 @@ router.post('/add', async (req, res) => {
   }
 });
 
+// Read
+router.get('/list', async (req, res) => {
+  try {
+    const pairs = await CurrencyPair.find();
+    res.json(pairs);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 
 module.exports = router;
