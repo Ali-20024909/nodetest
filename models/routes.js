@@ -24,5 +24,15 @@ router.get('/list', async (req, res) => {
   }
 });
 
+// Update
+router.put('/update/:id', async (req, res) => {
+  try {
+    const updatedPair = await CurrencyPair.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.json({ message: 'Currency pair updated!', data: updatedPair });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 
 module.exports = router;
