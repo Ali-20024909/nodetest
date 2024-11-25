@@ -34,5 +34,14 @@ router.put('/update/:id', async (req, res) => {
   }
 });
 
+// Delete
+router.delete('/delete/:id', async (req, res) => {
+  try {
+    await CurrencyPair.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Currency pair deleted!' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 module.exports = router;
