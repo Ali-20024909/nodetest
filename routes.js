@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const CurrencyPair = require('../models/CurrencyPair');
+const CurrencyPair = require('./CurrencyPair');
 
 // Create
 router.post('/add', async (req, res) => {
