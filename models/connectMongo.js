@@ -1,8 +1,11 @@
+// Load environment variables from .env file
+require('dotenv').config();
+
+// Construct the MongoDB connection URI using the environment variable
+const uri = `mongodb+srv://Ali:${process.env.MONGO_DB_PASSWORD}@cluster0.jm7tn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+
 // Import MongoDB client and API version
 const { MongoClient, ServerApiVersion } = require('mongodb');
-
-// Replace <db_password> with your actual MongoDB password
-const uri = "mongodb+srv://Ali:Nexus143@cluster0.jm7tn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 // Create a MongoClient instance with options
 const client = new MongoClient(uri, {
@@ -24,9 +27,10 @@ async function run() {
   } catch (error) {
     console.error("An error occurred while connecting to MongoDB:", error);
   } finally {
-
-await client.close();
+    // Close the client connection
+    await client.close();
+  }
 }
-}
 
+// Run the function and catch any errors
 run().catch(console.dir);
