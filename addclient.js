@@ -50,3 +50,23 @@ async function addClient() {
 }
 
 showLoading(true, loadingOverlay);
+
+
+try {
+  const response = await fetch(`${API_URL}/api/clients`, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({
+          name: clientName,
+          email: clientEmail,
+          contactPerson: clientContact,
+          projectType: projectType,
+          projectBudget: parseFloat(projectBudget),
+          startingDate: startingDate,
+          deadline: deadline
+      })
+  });
+
