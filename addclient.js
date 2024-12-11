@@ -70,3 +70,19 @@ try {
       })
   });
 
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.error || 'Failed to add client');
+}
+
+// Clear form fields
+document.getElementById('clientName').value = '';
+document.getElementById('clientEmail').value = '';
+document.getElementById('clientContact').value = '';
+document.getElementById('projectType').value = '';
+document.getElementById('projectBudget').value = '';
+document.getElementById('startDate').value = '';
+document.getElementById('deadline').value = '';
+document.querySelectorAll('.project-type-box').forEach(box => box.classList.remove('selected'));
+
+alert('Client added successfully!');
