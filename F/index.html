@@ -12,3 +12,24 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
 </head>
 
+<body>
+  <div id="app">
+      <div class="dashboard-header">
+          <div class="greeting-section">
+              <h1 class="text-left">Hey, <span id="userName">Username</span> 👋</h1>
+              <p class="text-left">Welcome back to your dashboard</p>
+          </div>
+          <div class="header-actions">
+              <button onclick="window.location.href='clients-list.html'" class="add-client-btn">View All
+                  Clients</button>
+
+              <button onclick="window.location.href='addClient.html'" class="add-client-btn">
+                  <i class="fas fa-plus"></i> Add New Client
+              </button>
+              <button class="logout-btn" onclick="confirmSignOut()">
+                  <i class="fas fa-sign-out-alt"></i>
+              </button>
+
+
+          </div>
+      </div>
