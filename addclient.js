@@ -86,3 +86,27 @@ document.getElementById('deadline').value = '';
 document.querySelectorAll('.project-type-box').forEach(box => box.classList.remove('selected'));
 
 alert('Client added successfully!');
+
+ // Optionally redirect to clients list
+        // window.location.href = 'clients-list.html';
+
+      } catch (error) {
+        console.error("Error adding client: ", error);
+        alert(error.message || "Failed to add client. Please try again.");
+    } finally {
+        showLoading(false, loadingOverlay);
+    }
+}
+
+function selectProjectType(element, type) {
+    // Remove selected class from all boxes
+    document.querySelectorAll('.project-type-box').forEach(box => {
+        box.classList.remove('selected');
+    });
+    
+    // Add selected class to clicked box
+    element.classList.add('selected');
+    
+    // Update hidden input value
+    document.getElementById('projectType').value = type;
+}
