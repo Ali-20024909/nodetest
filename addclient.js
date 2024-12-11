@@ -28,3 +28,17 @@ function showLoading(show, loadingOverlay) {
 async function addClient() {
   const loadingOverlay = document.getElementById('loadingOverlay');
   const token = localStorage.getItem('authToken');
+  if (!token) {
+    alert("You must be logged in to add clients");
+    window.location.href = 'login.html';
+    return;
+}
+
+ // Get form values
+ const clientName = document.getElementById('clientName').value.trim();
+ const clientEmail = document.getElementById('clientEmail').value.trim();
+ const clientContact = document.getElementById('clientContact').value.trim();
+ const projectType = document.getElementById('projectType').value.trim();
+ const projectBudget = document.getElementById('projectBudget').value.trim();
+ const startingDate = document.getElementById('startDate').value.trim();
+ const deadline = document.getElementById('deadline').value.trim();
