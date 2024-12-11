@@ -42,3 +42,11 @@ async function addClient() {
  const projectBudget = document.getElementById('projectBudget').value.trim();
  const startingDate = document.getElementById('startDate').value.trim();
  const deadline = document.getElementById('deadline').value.trim();
+
+  // Basic validation
+  if (!clientName || !clientEmail || !clientContact || !projectType || !projectBudget) {
+    alert("Please fill in all required fields before submitting.");
+    return;
+}
+
+showLoading(true, loadingOverlay);
