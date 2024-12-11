@@ -10,3 +10,53 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <title>Company Management System</title>
 </head>
+<body>
+  <div id="app">
+      <h1>Client Management System</h1>
+  
+      <div id="clientsSection" class="tab-content active">
+          <div id="clientForm" class="form-container">
+              <div class="list-header">
+                  <h2>Add New Client</h2>
+                  <button onclick="window.location.href='clients-list.html'" class="view-all-btn">View All Clients</button>
+              </div>
+              <input type="text" id="clientName" placeholder="Company Name">
+              <input type="email" id="clientEmail" placeholder="Email">
+              <input type="text" id="clientContact" placeholder="Contact Person">
+              <div class="project-types">
+                  <div class="project-type-box" data-type="web" onclick="selectProjectType(this, 'web')">
+                      <i class="fas fa-globe"></i>
+                      <span>Web Development</span>
+                  </div>
+                  <div class="project-type-box" data-type="mobile" onclick="selectProjectType(this, 'mobile')">
+                      <i class="fas fa-mobile-alt"></i>
+                      <span>Mobile Development</span>
+                  </div>
+                  <div class="project-type-box" data-type="desktop" onclick="selectProjectType(this, 'desktop')">
+                      <i class="fas fa-desktop"></i>
+                      <span>Desktop Software</span>
+                  </div>
+                  <div class="project-type-box" data-type="cloud" onclick="selectProjectType(this, 'cloud')">
+                      <i class="fas fa-cloud"></i>
+                      <span>Cloud Solutions</span>
+                  </div>
+              </div>
+              <input type="hidden" id="projectType" value="">
+              <div class="form-row">
+                  <input type="number" id="projectBudget" placeholder="Project Budget">
+                  <input type="date" id="startDate" placeholder="Start Date">
+                  <input type="date" id="deadline" placeholder="Deadline">
+              </div>
+              <button onclick="addClient()">Add Client</button>
+          </div>
+      </div>
+      <div id="loadingOverlay" class="loading-overlay">
+          <div class="loading-spinner">
+              <div class="spinner-circle"></div>
+              <div class="spinner-text">Please wait...</div>
+          </div>
+      </div>
+  </div>
+  <script src="addClient.js"></script>
+</body>
+</html>
