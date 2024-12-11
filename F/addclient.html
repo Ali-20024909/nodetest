@@ -1,10 +1,12 @@
-const mongoose = require('mongoose');
-
-const CurrencyPairSchema = new mongoose.Schema({
-  baseCurrency: { type: String, required: true },
-  targetCurrency: { type: String, required: true },
-  exchangeRate: { type: Number, required: true },
-  createdAt: { type: Date, default: Date.now },
-});
-
-module.exports = mongoose.model('CurrencyPair', CurrencyPairSchema);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="addClient.css">
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>Company Management System</title>
+</head>
