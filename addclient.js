@@ -20,3 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 });
+
+function showLoading(show, loadingOverlay) {
+  loadingOverlay.style.display = show ? 'flex' : 'none';
+}
+
+async function addClient() {
+  const loadingOverlay = document.getElementById('loadingOverlay');
+  const token = localStorage.getItem('authToken');
