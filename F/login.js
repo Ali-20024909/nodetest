@@ -44,3 +44,24 @@ document.addEventListener('DOMContentLoaded', () => {
       window.location.href = 'index.html';
   }
 });
+
+function setupPasswordToggle() {
+  const passwordInput = document.getElementById('passwordInput');
+  const toggleButton = document.querySelector('.password-toggle');
+  const toggleIcon = toggleButton.querySelector('i');
+
+  toggleButton.addEventListener('click', () => {
+      const type = passwordInput.type === 'password' ? 'text' : 'password';
+      passwordInput.type = type;
+
+      if (type === 'password') {
+          toggleIcon.className = 'fas fa-eye';
+          toggleButton.classList.remove('showing');
+      } else {
+          toggleIcon.className = 'fas fa-eye-slash';
+          toggleButton.classList.add('showing');
+      }
+
+      passwordInput.focus();
+  });
+}
