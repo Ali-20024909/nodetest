@@ -58,3 +58,40 @@ h2 {
     transform: translateY(0);
 }
 
+/* Responsive Design */
+@media (max-width: 768px) {
+    .project-types {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .project-types {
+        grid-template-columns: 1fr;
+    }
+}
+
+button {
+    background: #2196F3;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #1976D2;
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+    transform: translateY(-2px);
+
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+
