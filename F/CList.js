@@ -245,3 +245,10 @@ async function editClient(clientId) {
         }
     };
 }
+
+// Close modal when clicking outside
+elements.editDialog?.addEventListener('click', (e) => {
+    if (e.target === elements.editDialog) {
+        closeEditDialog();
+    }
+});
