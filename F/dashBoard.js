@@ -158,3 +158,12 @@ function confirmSignOut() {
         signOut(); 
     }
 }
+
+function signOut() {
+    localStorage.removeItem('authToken');
+    window.location.href = 'login.html';
+}
+
+// Optional: Refresh metrics and activity periodically
+setInterval(loadDashboardMetrics, 60000); // Every minute
+setInterval(loadRecentActivity, 60000);
