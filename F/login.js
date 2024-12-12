@@ -80,3 +80,21 @@ async function handleLogin() {
       alert('Please enter both email and password');
       return;
   }
+
+  showLoading(true);
+
+    try {
+        // Try to login
+        const response = await fetch(`${API_URL}/api/auth/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw { code: data.error };
+        }
