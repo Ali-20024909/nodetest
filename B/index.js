@@ -284,4 +284,74 @@ app.get('/api/dashboard/metrics', authenticateToken, (req, res) => {
         res.json(metrics);
     });
 });
+// Get recent activity
+app.get('/api/dashboard/activity', authenticateToken, (req, res) => {
+    const userId = req.user.userId;
+
+    db.all(`
+        SELECT id, activity,
+                 strftime('%Y-%m-%dT%H:%M:%fZ', timestamp) as timestamp
+        FROM activity_history
+        WHERE user_id = ?
+        ORDER BY timestamp DESC
+        LIMIT 10
+    `, [userId], (err, activities) => {
+        if (err) return res.status(500).json({ error: 'Database error' });
+        res.json(activities);
+    });
+});
+
+// Add activity
+app.post('/api/dashboard/activity', authenticateToken, (req, res) => {
+    const { activity } = req.body;
+    const userId = req.user.userId;
+
+    if (!activity) {
+        return res.status(400).json({ error: 'Activity is required' });
+    }
+
+    const timestamp = new Date().toISOString(); // Store as ISO string
+
+
+    db.run(
+        'INSERT INTO activity_history (user_id, activity) VALUES (?, ?)',
+        [userId, activity, timestamp],
+        function (err) {
+            if (err) return res.status(500).json({ error: 'Database error' });
+            res.status(201).json({ id: this.lastID, activity, timestamp: new Date() });
+        }
+    );
+});
+
+
+// Update client
+app.put('/api/clients/:id', authenticateToken, (req, res) => {
+    const clientId = req.params.id;
+    const userId = req.user.userId;
+    const {
+        name,
+        contact_person,
+        project_type,
+        project_budget,
+        starting_date,
+        deadline
+    } = req.body;
+
+    db.run(
+        `UPDATE clients 
+         SET name = ?, contact_person = ?, project_type = ?, 
+             project_budget = ?, starting_date = ?, deadline = ?
+         WHERE id = ? AND user_id = ?`,
+        [name, contact_person, project_type, project_budget, starting_date, deadline, clientId, userId],
+        function(err) {
+            if (err) {
+                return res.status(500).json({ error: 'Failed to update client' });
+            }
+            if (this.changes === 0) {
+                return res.status(404).json({ error: 'Client not found' });
+            }
+            res.json({ message: 'Client updated successfully' });
+        }
+    );
+});
 
