@@ -82,7 +82,6 @@ async function loadDashboardMetrics() {
         console.error('Error loading metrics:', error);
     }
 }
-
 function formatRelativeTime(timestamp) {
     const date = new Date(timestamp);
     const now = new Date();
@@ -116,7 +115,6 @@ function formatRelativeTime(timestamp) {
         day: 'numeric'
     });
 }
-
 async function loadRecentActivity() {
     try {
         const token = localStorage.getItem('authToken');
