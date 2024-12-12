@@ -90,3 +90,33 @@ body {
 .input-group input::placeholder {
     color: #a0aec0;
 }
+
+/* Button Styles */
+.auth-buttons {
+    margin-top: 12px;
+}
+
+.auth-button {
+    width: 100%;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.auth-button.primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.auth-button.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.auth-button.primary:active {
+    transform: translateY(0);
+}
