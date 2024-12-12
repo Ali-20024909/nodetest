@@ -122,3 +122,48 @@ app.get('/api/users', (req, res) => {
         res.json(rows);
     });
 });
+
+
+app.post('/api/auth/register', async (req, res) => {
+    const { name, email, password } = req.body;
+
+    if (!name || !email || !password) {
+        return res.status(400).json({ error: 'Name, email, and password are required' });
+    }
+
+    try {
+        // Hash password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        db.run(
+            'INSERT INTO users (name, email, password) VALUES (?, ?, ?)',
+            [name, email, hashedPassword],
+            function (err) {
+                if (err) {
+                    if (err.message.includes('UNIQUE constraint failed')) {
+                        return res.status(409).json({ error: 'email_already_exists' });
+                    }
+                    return res.status(500).json({ error: 'Database error' });
+                }
+
+                // Generate JWT token
+                const token = jwt.sign(
+                    { userId: this.lastID, email },
+                    "Moeez+Butt=MoeezButt",
+                    { expiresIn: '24h' }
+                );
+
+                res.status(201).json({
+                    token,
+                    user: {
+                        id: this.lastID,
+                        name,
+                        email
+                    }
+                });
+            }
+        );
+    } catch (error) {
+        res.status(500).json({ error: 'Registration error' });
+    }
+});
