@@ -152,3 +152,9 @@ async function loadRecentActivity() {
         elements.activityList.innerHTML = '<div class="activity-item">Failed to load activity</div>';
     }
 }
+
+function confirmSignOut() {
+    if (confirm("Are you sure you want to logout?")) {
+        signOut(); 
+    }
+}
