@@ -48,5 +48,11 @@
 
 const API_URL = 'http://localhost:3000';
 
-
+// DOM Elements
+const elements = {
+    tableView: document.getElementById('tableView'),
+    editDialog: document.getElementById('editDialog'),
+    filtersGrid: document.querySelector('.filters-grid'),
+    searchInput: document.getElementById('searchInput')
+};
 
