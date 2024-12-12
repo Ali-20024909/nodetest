@@ -317,3 +317,9 @@ function exportToExcel() {
     document.body.appendChild(link);
     link.click();
 }
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && elements.editDialog.style.display === 'flex') {
+        closeEditDialog();
+    }
+});
