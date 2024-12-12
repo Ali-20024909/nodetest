@@ -77,3 +77,14 @@ input:focus, select:focus {
     align-items: center;
     z-index: 1000;
 }
+
+.loading-overlay.active {
+    display: flex;
+}
+
+.loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
