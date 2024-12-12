@@ -293,3 +293,27 @@ async function addActivity(activity) {
         console.error('Error adding activity:', error);
     }
 }
+
+function exportToExcel() {
+    const rows = [
+        ['Company', 'Contact Person', 'Project Type', 'Budget', 'Starting Date', 'Deadline'],
+        ...clients.map(client => [
+            client.name,
+            client.contact_person,
+            client.project_type,
+            client.project_budget,
+            client.starting_date,
+            client.deadline
+        ])
+    ];
+
+    let csvContent = "data:text/csv;charset=utf-8," 
+        + rows.map(e => e.join(",")).join("\n");
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "clients.csv");
+    document.body.appendChild(link);
+    link.click();
+}
