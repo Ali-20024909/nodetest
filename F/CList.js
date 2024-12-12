@@ -58,4 +58,15 @@ const elements = {
 let clients = [];
 let currentFilter = 'all';
 let searchQuery = '';
+// Check authentication on page load
+document.addEventListener('DOMContentLoaded', () => {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+        window.location.href = 'login.html';
+        return;
+    }
+    loadClients();
+    setupFilterListeners();
+    setupSearch();
+});
 
