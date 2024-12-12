@@ -42,4 +42,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
+function loadUserData(userData) {
+    if (elements.userName) {
+        elements.userName.textContent = userData.name || userData.email || 'User';
+    }
+}
 
