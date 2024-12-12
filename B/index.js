@@ -111,3 +111,14 @@ app.post('/api/auth/login', async (req, res) => {
         }
     });
 });
+
+// Get all users
+app.get('/api/users', (req, res) => {
+    db.all('SELECT * FROM users', [], (err, rows) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json(rows);
+    });
+});
