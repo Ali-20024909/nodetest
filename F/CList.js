@@ -169,3 +169,8 @@ function formatCurrency(amount) {
         maximumFractionDigits: 0
     }).format(amount);
 }
+function formatDate(dateString) {
+    if (!dateString) return '-';
+    const date = new Date(dateString);
+    return date.toLocaleDateString();
+}
