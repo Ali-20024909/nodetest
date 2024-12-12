@@ -32,3 +32,15 @@ const elements = {
 
 // API Configuration
 const API_URL = 'http://localhost:3000'; // Update this with your actual API URL
+
+// Event Listeners
+document.addEventListener('DOMContentLoaded', () => {
+  setupAuthListeners();
+  setupPasswordToggle();
+  
+  // Check for existing token
+  const token = localStorage.getItem('authToken');
+  if (token) {
+      window.location.href = 'index.html';
+  }
+});
