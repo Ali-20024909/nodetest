@@ -441,3 +441,8 @@ td button:last-child:hover {
     background: rgba(76, 175, 80, 0.1);
     color: #4CAF50;
 }
+
+.total-clients .metric-icon {
+    background: rgba(33, 150, 243, 0.1);
+    color: #2196F3;
+}
