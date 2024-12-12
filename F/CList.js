@@ -69,4 +69,10 @@ document.addEventListener('DOMContentLoaded', () => {
     setupFilterListeners();
     setupSearch();
 });
+function setupSearch() {
+    elements.searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value.toLowerCase();
+        applyFiltersAndSearch();
+    });
+}
 
