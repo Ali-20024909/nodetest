@@ -65,3 +65,18 @@ function setupPasswordToggle() {
       passwordInput.focus();
   });
 }
+function setupAuthListeners() {
+  elements.continueButton.addEventListener('click', handleLogin);
+  elements.passwordInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') handleLogin();
+  });
+}
+
+async function handleLogin() {
+  const email = elements.emailInput.value.trim();
+  const password = elements.passwordInput.value;
+
+  if (!email || !password) {
+      alert('Please enter both email and password');
+      return;
+  }
