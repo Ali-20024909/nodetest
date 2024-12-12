@@ -82,3 +82,37 @@ async function loadDashboardMetrics() {
         console.error('Error loading metrics:', error);
     }
 }
+
+function formatRelativeTime(timestamp) {
+    const date = new Date(timestamp);
+    const now = new Date();
+    const diffInSeconds = Math.floor((now - date) / 1000);
+    
+    // Handle invalid dates
+    if (isNaN(date.getTime())) {
+        return 'unknown time';
+    }
+
+    // More precise time calculations
+    if (diffInSeconds < 30) return 'just now';
+    if (diffInSeconds < 60) return `${diffInSeconds} seconds ago`;
+    if (diffInSeconds < 3600) {
+        const minutes = Math.floor(diffInSeconds / 60);
+        return `${minutes} minute${minutes === 1 ? '' : 's'} ago`;
+    }
+    if (diffInSeconds < 86400) {
+        const hours = Math.floor(diffInSeconds / 3600);
+        return `${hours} hour${hours === 1 ? '' : 's'} ago`;
+    }
+    if (diffInSeconds < 604800) {
+        const days = Math.floor(diffInSeconds / 86400);
+        return `${days} day${days === 1 ? '' : 's'} ago`;
+    }
+    
+    // Format the date if it's older than a week
+    return date.toLocaleDateString(undefined, {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+    });
+}
