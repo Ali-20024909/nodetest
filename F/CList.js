@@ -277,3 +277,19 @@ async function deleteClient(clientId) {
         alert('Failed to delete client. Please try again.');
     }
 }
+
+async function addActivity(activity) {
+    try {
+        const token = localStorage.getItem('authToken');
+        await fetch(`${API_URL}/api/dashboard/activity`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ activity })
+        });
+    } catch (error) {
+        console.error('Error adding activity:', error);
+    }
+}
