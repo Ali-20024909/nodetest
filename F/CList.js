@@ -123,3 +123,40 @@ async function loadClients() {
     }
 }
 
+function renderClients(clientsToRender) {
+    const tableHTML = `
+        <table class="clients-table">
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th>Contact Person</th>
+                    <th>Project Type</th>
+                    <th>Budget</th>
+                    <th>Starting Date</th>
+                    <th>Deadline</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${clientsToRender.length === 0 ? 
+                    `<tr><td colspan="7" class="no-results">No clients found</td></tr>` :
+                    clientsToRender.map(client => `
+                    <tr>
+                        <td>${client.name}</td>
+                        <td>${client.contact_person}</td>
+                        <td>${client.project_type}</td>
+                        <td>${formatCurrency(client.project_budget)}</td>
+                        <td>${formatDate(client.starting_date)}</td>
+                        <td>${formatDate(client.deadline)}</td>
+                        <td>
+                            <button onclick="editClient(${client.id})" class="edit-btn">Edit</button>
+                            <button onclick="deleteClient(${client.id})" class="delete-btn">Delete</button>
+                        </td>
+                    </tr>
+                `).join('')}
+            </tbody>
+        </table>
+    `;
+    
+    elements.tableView.innerHTML = tableHTML;
+}
