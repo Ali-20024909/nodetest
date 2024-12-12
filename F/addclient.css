@@ -307,3 +307,54 @@ td button:last-child:hover {
     background-color: #2196F3;
     box-shadow: 0 2px 4px rgba(33, 150, 243, 0.2);
 }
+
+.view-all-btn:hover {
+    background-color: #1976D2;
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+}
+
+/* Form container */
+.form-container {
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Status styles */
+.status-active {
+    color: #4CAF50;
+    font-weight: 600;
+}
+
+.status-inactive {
+    color: #f44336;
+    font-weight: 600;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    body {
+        padding: 20px 10px;
+    }
+    
+    #app {
+        padding: 20px;
+    }
+    
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .tabs {
+        overflow-x: auto;
+        padding: 8px;
+    }
