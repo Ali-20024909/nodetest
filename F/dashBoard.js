@@ -48,3 +48,37 @@ function loadUserData(userData) {
     }
 }
 
+async function loadDashboardMetrics() {
+    try {
+        const token = localStorage.getItem('authToken');
+        const response = await fetch(`${API_URL}/api/dashboard/metrics`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) throw new Error('Failed to load metrics');
+
+        const metrics = await response.json();
+
+        if (elements.totalClients) {
+            elements.totalClients.textContent = metrics.totalClients;
+        }
+        if (elements.totalRevenue) {
+            elements.totalRevenue.textContent = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(metrics.totalRevenue);
+        }
+        if (elements.totalProjects) {
+            elements.totalProjects.textContent = metrics.totalProjects;
+        }
+        if (elements.completedProjects) {
+            elements.completedProjects.textContent = metrics.completedProjects;
+        }
+    } catch (error) {
+        console.error('Error loading metrics:', error);
+    }
+}
