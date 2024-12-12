@@ -58,3 +58,8 @@ const db = new sqlite3.Database('./database.sqlite', (err) => {
 
     }
 });
+
+// Sample routes
+app.get('/', (req, res) => {
+    res.json({ message: 'Welcome to the API' });
+});
