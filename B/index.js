@@ -167,3 +167,54 @@ app.post('/api/auth/register', async (req, res) => {
         res.status(500).json({ error: 'Registration error' });
     }
 });
+
+ // Basic validation
+ if (!name || !email || !contactPerson || !projectType || !projectBudget) {
+    return res.status(400).json({ error: 'All fields are required' });
+}
+
+const userId = req.user.userId;
+
+db.serialize(() => {
+    // Begin transaction
+    db.run('BEGIN TRANSACTION');
+
+    // Insert client
+    db.run(
+        `INSERT INTO clients (
+            user_id, name, email, contact_person, 
+            project_type, project_budget, starting_date, deadline
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+        [userId, name, email, contactPerson, projectType, projectBudget, startingDate, deadline],
+        function (err) {
+            if (err) {
+                db.run('ROLLBACK');
+                console.error('Error adding client:', err);
+                return res.status(500).json({ error: 'Failed to add client' });
+            }
+
+            const clientId = this.lastID;
+
+            // Add activity record
+            db.run(
+                `INSERT INTO activity_history (user_id, activity) VALUES (?, ?)`,
+                [userId, `Added new client: ${name}`],
+                (err) => {
+                    if (err) {
+                        db.run('ROLLBACK');
+                        console.error('Error adding activity:', err);
+                        return res.status(500).json({ error: 'Failed to add activity' });
+                    }
+
+                    // Commit transaction
+                    db.run('COMMIT');
+                    res.status(201).json({
+                        message: 'Client added successfully',
+                        clientId: clientId
+                    });
+                }
+            );
+        }
+    );
+});
+});
