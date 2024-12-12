@@ -252,3 +252,28 @@ elements.editDialog?.addEventListener('click', (e) => {
         closeEditDialog();
     }
 });
+
+async function deleteClient(clientId) {
+    const client = clients.find(c => c.id === clientId);
+    if (!client || !confirm('Are you sure you want to delete this client?')) return;
+
+    try {
+        const token = localStorage.getItem('authToken');
+        const response = await fetch(`${API_URL}/api/clients/${clientId}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) throw new Error('Failed to delete client');
+
+        // Add activity for delete
+        await addActivity(`Deleted client: ${client.name}`);
+
+        loadClients();
+    } catch (error) {
+        console.error('Error deleting client:', error);
+        alert('Failed to delete client. Please try again.');
+    }
+}
