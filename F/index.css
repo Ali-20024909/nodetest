@@ -94,4 +94,9 @@ button:active {
     transform: translateY(0);
 }
 
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
 
