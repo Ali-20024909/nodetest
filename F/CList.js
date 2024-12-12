@@ -55,4 +55,7 @@ const elements = {
     filtersGrid: document.querySelector('.filters-grid'),
     searchInput: document.getElementById('searchInput')
 };
+let clients = [];
+let currentFilter = 'all';
+let searchQuery = '';
 
