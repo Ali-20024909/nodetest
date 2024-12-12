@@ -219,3 +219,51 @@ db.serialize(() => {
 });
 });
 
+// Get clients for a user
+app.get('/api/clients', authenticateToken, (req, res) => {
+const userId = req.user.userId;
+
+db.all('SELECT * FROM clients WHERE user_id = ? ORDER BY created_at DESC', [userId],
+    (err, clients) => {
+        if (err) {
+            console.error('Error fetching clients:', err);
+            return res.status(500).json({ error: 'Failed to fetch clients' });
+        }
+        res.json(clients);
+    });
+});
+
+// Create a new user
+app.post('/api/users', (req, res) => {
+const { name, email } = req.body;
+if (!name || !email) {
+    res.status(400).json({ error: 'Name and email are required API' });
+    return;
+}
+
+db.run('INSERT INTO users (name, email) VALUES (?, ?)', [name, email], function (err) {
+    if (err) {
+        res.status(500).json({ error: err.message });
+        return;
+    }
+    res.json({
+        id: this.lastID,
+        name,
+        email
+    });
+});
+});
+
+
+// Get user data
+app.get('/api/users/me', authenticateToken, (req, res) => {
+db.get('SELECT id, name, email FROM users WHERE id = ?',
+    [req.user.userId],
+    (err, user) => {
+        if (err) return res.status(500).json({ error: 'Database error' });
+        if (!user) return res.status(404).json({ error: 'User not found' });
+        res.json(user);
+    });
+});
+
+
