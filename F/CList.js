@@ -323,3 +323,10 @@ document.addEventListener('keydown', (e) => {
         closeEditDialog();
     }
 });
+
+// Close modal when clicking outside
+elements.editDialog?.addEventListener('click', (e) => {
+    if (e.target === elements.editDialog) {
+        elements.editDialog.style.display = 'none';
+    }
+});
