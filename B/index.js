@@ -266,4 +266,22 @@ db.get('SELECT id, name, email FROM users WHERE id = ?',
     });
 });
 
+// Get dashboard metrics
+app.get('/api/dashboard/metrics', authenticateToken, (req, res) => {
+    const userId = req.user.userId;
+    const today = new Date().toISOString().split('T')[0];
+
+    db.get(`
+        SELECT 
+            COUNT(*) as totalClients,
+            COALESCE(SUM(project_budget), 0) as totalRevenue,
+            COUNT(CASE WHEN starting_date IS NOT NULL THEN 1 END) as totalProjects,
+            COUNT(CASE WHEN deadline < ? THEN 1 END) as completedProjects
+        FROM clients 
+        WHERE user_id = ?
+    `, [today, userId], (err, metrics) => {
+        if (err) return res.status(500).json({ error: 'Database error' });
+        res.json(metrics);
+    });
+});
 
