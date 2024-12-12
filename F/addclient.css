@@ -456,3 +456,40 @@ td button:last-child:hover {
     background: rgba(156, 39, 176, 0.1);
     color: #9C27B0;
 }
+
+.metric-content {
+    flex: 1;
+}
+
+.metric-content h3 {
+    color: #666;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.metric-value {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.metric-trend {
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.metric-trend.positive {
+    color: #4CAF50;
+}
+
+.metric-trend.negative {
+    color: #f44336;
+}
+
+.metric-trend.neutral {
+    color: #757575;
+}
