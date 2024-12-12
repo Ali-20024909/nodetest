@@ -355,3 +355,32 @@ app.put('/api/clients/:id', authenticateToken, (req, res) => {
     );
 });
 
+// Delete client
+app.delete('/api/clients/:id', authenticateToken, (req, res) => {
+    const clientId = req.params.id;
+    const userId = req.user.userId;
+
+    db.run(
+        'DELETE FROM clients WHERE id = ? AND user_id = ?',
+        [clientId, userId],
+        function(err) {
+            if (err) {
+                return res.status(500).json({ error: 'Failed to delete client' });
+            }
+            if (this.changes === 0) {
+                return res.status(404).json({ error: 'Client not found' });
+            }
+            res.json({ message: 'Client deleted successfully' });
+        }
+    );
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ error: 'Something broke!' });
+});
+
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+});
