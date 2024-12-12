@@ -116,3 +116,39 @@ function formatRelativeTime(timestamp) {
         day: 'numeric'
     });
 }
+
+async function loadRecentActivity() {
+    try {
+        const token = localStorage.getItem('authToken');
+        const response = await fetch(`${API_URL}/api/dashboard/activity`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) throw new Error('Failed to load activity');
+
+        const activities = await response.json();
+
+        if (activities.length === 0) {
+            elements.activityList.innerHTML = '<div class="activity-item">No recent activity</div>';
+            return;
+        }
+
+        elements.activityList.innerHTML = activities.map(activity => {
+            // Ensure timestamp is properly formatted
+            const timestamp = activity.timestamp ? new Date(activity.timestamp).toISOString() : null;
+            return `
+                <div class="activity-item" data-id="${activity.id}">
+                    <div class="activity-content">
+                        <p>${activity.activity}</p>
+                        <span class="activity-time">${timestamp ? formatRelativeTime(timestamp) : 'unknown time'}</span>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    } catch (error) {
+        console.error('Error loading activity:', error);
+        elements.activityList.innerHTML = '<div class="activity-item">Failed to load activity</div>';
+    }
+}
