@@ -195,3 +195,53 @@ function filterClients(filter) {
     currentFilter = filter;
     applyFiltersAndSearch();
 }
+
+async function editClient(clientId) {
+    const client = clients.find(c => c.id === clientId);
+    if (!client) return;
+
+    elements.editDialog.style.display = 'flex';
+    
+    // Fill the edit form with client data
+    document.getElementById('editName').value = client.name;
+    document.getElementById('editContact').value = client.contact_person;
+    document.getElementById('editType').value = client.project_type;
+    document.getElementById('editBudget').value = client.project_budget;
+    document.getElementById('editStartDate').value = client.starting_date;
+    document.getElementById('editDeadline').value = client.deadline;
+
+    // Setup save handler
+    document.getElementById('saveChanges').onclick = async () => {
+        try {
+            const token = localStorage.getItem('authToken');
+            const updatedData = {
+                name: document.getElementById('editName').value,
+                contact_person: document.getElementById('editContact').value,
+                project_type: document.getElementById('editType').value,
+                project_budget: parseFloat(document.getElementById('editBudget').value),
+                starting_date: document.getElementById('editStartDate').value,
+                deadline: document.getElementById('editDeadline').value
+            };
+
+            const response = await fetch(`${API_URL}/api/clients/${clientId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(updatedData)
+            });
+
+            if (!response.ok) throw new Error('Failed to update client');
+
+            // Add activity for edit
+            await addActivity(`Updated client: ${updatedData.name}`);
+
+            elements.editDialog.style.display = 'none';
+            loadClients();
+        } catch (error) {
+            console.error('Error updating client:', error);
+            alert('Failed to update client. Please try again.');
+        }
+    };
+}
