@@ -124,3 +124,30 @@ input:focus, select:focus {
     align-items: center;
     gap: 10px;
 }
+
+.project-type-box i {
+    font-size: 24px;
+    color: #666;
+    transition: all 0.3s ease;
+}
+
+.project-type-box span {
+    font-size: 14px;
+    font-weight: 500;
+    color: #444;
+}
+
+.project-type-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.project-type-box.selected {
+    background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+}
+
+.project-type-box.selected i,
+.project-type-box.selected span {
+    color: white;
+}
