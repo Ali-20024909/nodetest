@@ -446,3 +446,8 @@ td button:last-child:hover {
     background: rgba(33, 150, 243, 0.1);
     color: #2196F3;
 }
+
+.active-projects .metric-icon {
+    background: rgba(255, 152, 0, 0.1);
+    color: #FF9800;
+}
