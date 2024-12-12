@@ -98,3 +98,19 @@ function applyFiltersAndSearch() {
     renderClients(filteredClients);
 }
 
+function closeEditDialog() {
+    elements.editDialog.style.display = 'none';
+}
+
+async function loadClients() {
+    try {
+        const token = localStorage.getItem('authToken');
+        const response = await fetch(`${API_URL}/api/clients`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch clients');
+        }
