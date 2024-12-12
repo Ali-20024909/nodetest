@@ -21,3 +21,12 @@ body {
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
     backdrop-filter: blur(10px);
 }
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 32px;
+    font-weight: 600;
+}
+lhkuj
