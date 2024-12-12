@@ -37,6 +37,8 @@ h2 {
     font-weight: 600;
 }
 
+
+
 .logout-btn {
     background: #f44336;
     color: white;
@@ -94,11 +96,22 @@ button:active {
     transform: translateY(0);
 }
 
+
+
+
+
+
+
 .header-actions {
     display: flex;
     align-items: center;
     gap: 12px;
 }
+
+
+
+
+
 
 /* Animations */
 @keyframes fadeIn {
