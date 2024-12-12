@@ -76,3 +76,13 @@ function setupSearch() {
     });
 }
 
+function applyFiltersAndSearch() {
+    let filteredClients = clients;
+    
+    // Apply project type filter
+    if (currentFilter !== 'all') {
+        filteredClients = filteredClients.filter(client => 
+            client.project_type.toLowerCase().includes(currentFilter.toLowerCase())
+        );
+    }
+    
