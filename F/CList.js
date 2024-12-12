@@ -190,3 +190,8 @@ function setupFilterListeners() {
         });
     });
 }
+
+function filterClients(filter) {
+    currentFilter = filter;
+    applyFiltersAndSearch();
+}
