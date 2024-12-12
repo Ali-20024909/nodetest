@@ -36,3 +36,22 @@ h2 {
     font-size: 24px;
     font-weight: 600;
 }
+
+.logout-btn {
+    background: #f44336;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #d32f2f;
+    box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+    transform: translateY(-2px);
+}
+
+
