@@ -63,3 +63,51 @@ const db = new sqlite3.Database('./database.sqlite', (err) => {
 app.get('/', (req, res) => {
     res.json({ message: 'Welcome to the API' });
 });
+
+// Login endpoint
+app.post('/api/auth/login', async (req, res) => {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+        return res.status(400).json({ error: 'Email and password are required' });
+    }
+
+    db.get('SELECT * FROM users WHERE email = ?', [email], async (err, user) => {
+        if (err) {
+            return res.status(500).json({ error: 'Database error' });
+        }
+
+        if (!user) {
+            return res.status(404).json({ error: 'user_not_found' });
+        }
+
+        if (user.disabled) {
+            return res.status(403).json({ error: 'account_disabled' });
+        }
+
+        try {
+            const passwordMatch = await bcrypt.compare(password, user.password);
+            if (!passwordMatch) {
+                return res.status(401).json({ error: 'invalid_credentials' });
+            }
+
+            // Generate JWT token
+            const token = jwt.sign(
+                { userId: user.id, email: user.email },
+                "Moeez+Butt=MoeezButt",
+                { expiresIn: '24h' }
+            );
+
+            res.json({
+                token,
+                user: {
+                    id: user.id,
+                    email: user.email,
+                    name: user.name
+                }
+            });
+        } catch (error) {
+            res.status(500).json({ error: 'Authentication error' });
+        }
+    });
+});
