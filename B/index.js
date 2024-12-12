@@ -1,8 +1,8 @@
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const cors = require('cors');
-const bcrypt = require('bcrypt'); // You'll need to install this
-const jwt = require('jsonwebtoken'); // You'll need to install this
+const bcrypt = require('bcrypt'); 
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const app = express();
