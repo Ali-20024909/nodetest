@@ -190,3 +190,12 @@ body {
         padding-top: 40px;
     }
 }
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .auth-container,
+    .auth-button,
+    .spinner-circle {
+        transition: none;
+    }
+}
