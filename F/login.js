@@ -29,3 +29,6 @@ const elements = {
   continueButton: document.getElementById('continueButton'),
   loadingOverlay: document.getElementById('loadingOverlay')
 };
+
+// API Configuration
+const API_URL = 'http://localhost:3000'; // Update this with your actual API URL
