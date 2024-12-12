@@ -55,3 +55,10 @@ input, select {
     font-size: 15px;
     transition: all 0.3s ease;
 }
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #667eea;
+
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
