@@ -169,8 +169,24 @@ function formatCurrency(amount) {
         maximumFractionDigits: 0
     }).format(amount);
 }
+
 function formatDate(dateString) {
     if (!dateString) return '-';
     const date = new Date(dateString);
     return date.toLocaleDateString();
+}
+
+function setupFilterListeners() {
+    const filters = ['all', 'web', 'mobile', 'desktop', 'cloud'];
+    filters.forEach(filter => {
+        document.querySelector(`[data-filter="${filter}"]`)?.addEventListener('click', (e) => {
+            // Remove active class from all filters
+            document.querySelectorAll('.filter-btn').forEach(btn => 
+                btn.classList.remove('active')
+            );
+            // Add active class to clicked filter
+            e.target.classList.add('active');
+            filterClients(filter);
+        });
+    });
 }
