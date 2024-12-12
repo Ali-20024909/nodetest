@@ -86,3 +86,15 @@ function applyFiltersAndSearch() {
         );
     }
     
+
+    // Apply search
+    if (searchQuery) {
+        filteredClients = filteredClients.filter(client => 
+            client.name.toLowerCase().includes(searchQuery) ||
+            client.contact_person.toLowerCase().includes(searchQuery)
+        );
+    }
+    
+    renderClients(filteredClients);
+}
+
