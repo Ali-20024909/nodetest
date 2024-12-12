@@ -5,6 +5,7 @@
     box-sizing: border-box;
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
+
 body {
     min-height: 100vh;
     display: flex;
@@ -21,6 +22,7 @@ body {
     justify-content: center;
     padding: 20px;
 }
+
 /* Auth Container */
 .auth-container {
     width: 100%;
@@ -199,6 +201,7 @@ body {
         transition: none;
     }
 }
+
 /* Password Input Styles */
 .password-group {
     position: relative;
