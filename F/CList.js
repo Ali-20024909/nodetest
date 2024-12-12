@@ -114,3 +114,12 @@ async function loadClients() {
         if (!response.ok) {
             throw new Error('Failed to fetch clients');
         }
+
+        clients = await response.json();
+        renderClients(clients);
+    } catch (error) {
+        console.error('Error loading clients:', error);
+        alert('Failed to load clients. Please try again.');
+    }
+}
+
