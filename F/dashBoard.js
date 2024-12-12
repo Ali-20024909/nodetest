@@ -19,5 +19,27 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
     }
 
+    try {
+        // Verify token and load user data
+        const userResponse = await fetch(`${API_URL}/api/users/me`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
 
-    
+        if (!userResponse.ok) {
+            throw new Error('Invalid token');
+        }
+
+        const userData = await userResponse.json();
+        loadUserData(userData);
+        loadDashboardMetrics();
+        loadRecentActivity();
+    } catch (error) {
+        console.error('Auth error:', error);
+        localStorage.removeItem('authToken');
+        window.location.href = 'login.html';
+    }
+});
+
+
