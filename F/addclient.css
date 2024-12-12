@@ -451,3 +451,8 @@ td button:last-child:hover {
     background: rgba(255, 152, 0, 0.1);
     color: #FF9800;
 }
+
+.completed-projects .metric-icon {
+    background: rgba(156, 39, 176, 0.1);
+    color: #9C27B0;
+}
