@@ -151,3 +151,71 @@ input:focus, select:focus {
 .project-type-box.selected span {
     color: white;
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .project-types {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .project-types {
+        grid-template-columns: 1fr;
+    }
+}
+
+button {
+    background:#2196F3;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #1976D2;
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+    transform: translateY(-2px);
+
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Table styles */
+#membersList {
+    margin-top: 30px;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+#searchMember {
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #444;
+}
