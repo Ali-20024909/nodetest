@@ -186,3 +186,60 @@ button:active {
     gap: 24px;
     margin-bottom: 40px;
 }
+
+.metric-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: #444;
+    display: flex;
+    gap: 16px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.metric-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+}
+
+.metric-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.total-revenue .metric-icon {
+    background: rgba(76, 175, 80, 0.1);
+    color: #4CAF50;
+}
+
+.total-clients .metric-icon {
+    background: rgba(33, 150, 243, 0.1);
+    color: #2196F3;
+}
+
+.active-projects .metric-icon {
+    background: rgba(255, 152, 0, 0.1);
+    color: #FF9800;
+}
+
+.completed-projects .metric-icon {
+    background: rgba(156, 39, 176, 0.1);
+    color: #9C27B0;
+}
+
+.metric-content {
+    flex: 1;
+}
+
+.metric-content h3 {
+    color: #666;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
